@@ -6,7 +6,7 @@ Project (www.freetype.org).  All rights reserved.
 ### Static pre-built versions of the FreeType project and its dependencies.
 
 The master branch is merely a template, all the code is in the version branches.  
-All the code is built automatically by [TravisCI](https://travis-ci.org/flga/freetype-builds). Headers and binaries are shipped as [Github Releases](https://github.com/flga/freetype-builds/releases).
+Builds are run automatically by [TravisCI](https://travis-ci.org/flga/freetype-builds). Headers and binaries are shipped as [Github Releases](https://github.com/flga/freetype-builds/releases).
 
 Every build produces 3 binaries, you should link against *one* of:
 * FreeType
