@@ -23,6 +23,9 @@ OSX    | `amd64`, `386`
 Branch | Dependencies | Status | Release
 ------ | ------------ | ------ | -------
 2.10.1 | `zlib-1.2.11` `libpng-1.6.37` `bzip2-1.0.8` `harfbuzz-2.5.3` | [![Build Status](https://travis-ci.org/flga/freetype-builds.svg?branch=2.10.1)](https://travis-ci.org/flga/freetype-builds) | [Download](https://github.com/flga/freetype-builds/releases/tag/2.10.1)
+2.10.0 | `zlib-1.2.11` `libpng-1.6.37` `bzip2-1.0.8` `harfbuzz-2.5.3` | [![Build Status](https://travis-ci.org/flga/freetype-builds.svg?branch=2.10.0)](https://travis-ci.org/flga/freetype-builds) | [Download](https://github.com/flga/freetype-builds/releases/tag/2.10.0)
+2.9.1 | `zlib-1.2.11` `libpng-1.6.37` `bzip2-1.0.8` `harfbuzz-2.5.3` | [![Build Status](https://travis-ci.org/flga/freetype-builds.svg?branch=2.9.1)](https://travis-ci.org/flga/freetype-builds) | [Download](https://github.com/flga/freetype-builds/releases/tag/2.9.1)
+2.9.0 | `zlib-1.2.11` `libpng-1.6.37` `bzip2-1.0.8` `harfbuzz-2.5.3` | [![Build Status](https://travis-ci.org/flga/freetype-builds.svg?branch=2.9.0)](https://travis-ci.org/flga/freetype-builds) | [Download](https://github.com/flga/freetype-builds/releases/tag/2.9.0)
 
 
 ### Disclaimer
