@@ -34,4 +34,4 @@ Branch | Dependencies | Status | Release
 
 This repo contains the sources "as-is" of the FreeType, harfbuzz, libpng, bzip2 and zlib projects, and all rights are reserved to the respective owners.
 
-Please review the LICENSE file, which contains all 3 licenses bundled. The individual license files are in their respective folders, except for zlib which does not ship with one, but can be found [here](https://zlib.net/zlib_license.html).
+Please review the LICENSE file, which contains all 4 licenses bundled. The individual license files are in their respective folders, except for zlib which does not ship with one, but can be found [here](https://zlib.net/zlib_license.html).
