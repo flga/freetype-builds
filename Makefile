@@ -38,6 +38,14 @@ ifeq ("${OS}", "linux")
 goLDFlags = -ldflags "-linkmode external -extldflags -static"
 endif
 
+clean-bzip2:
+	rm -rf $(build)/bzip2
+build-bzip2: clean-bzip2
+	mkdir -p $(build)/bzip2
+	cd src/$(FTB_BZIP2) \
+		&& make CFLAGS=$(archflags) \
+		&& make install PREFIX=$(build)/bzip2
+
 clean-zlib:
 	rm -rf $(build)/zlib
 build-zlib: clean-zlib
@@ -62,15 +70,14 @@ build-libpng: clean-libpng build-zlib
 
 clean-freetype:
 	rm -rf $(build)/freetype
-build-freetype: clean-freetype build-libpng build-zlib
+build-freetype: clean-freetype build-libpng build-zlib build-bzip2
 	mkdir -p $(build)/freetype
 	cd src/$(FTB_FREETYPE) \
-		&& PKG_CONFIG_LIBDIR=$(build)/zlib/lib/pkgconfig:$(build)/libpng/lib/pkgconfig CFLAGS=$(archflags) ./configure \
+		&& PKG_CONFIG_LIBDIR=$(build)/zlib/lib/pkgconfig:$(build)/libpng/lib/pkgconfig:$(build)/bzip2/lib/pkgconfig CFLAGS=$(archflags) ./configure \
 			--prefix=$(build)/freetype \
 			--enable-static \
 			--disable-shared \
 			--without-harfbuzz \
-			--without-bzip2 \
 		&& LD_LIBRARY_PATH=$(build)/zlib/lib:$(build)/libpng/lib make \
 		&& make install
 
@@ -99,16 +106,15 @@ build-harfbuzz: clean-harfbuzz build-libpng build-zlib build-freetype
 
 clean-freetypehb:
 	rm -rf $(build)/freetypehb
-build-freetypehb: clean-freetypehb build-libpng build-zlib build-harfbuzz
+build-freetypehb: clean-freetypehb build-libpng build-zlib build-bzip2 build-harfbuzz
 	mkdir -p $(build)/freetypehb
 	cd src/$(FTB_FREETYPE) \
 		&& make clean \
-		&& PKG_CONFIG_LIBDIR=$(build)/zlib/lib/pkgconfig:$(build)/libpng/lib/pkgconfig:$(build)/harfbuzz/lib/pkgconfig CFLAGS=$(archflags) ./configure \
+		&& PKG_CONFIG_LIBDIR=$(build)/zlib/lib/pkgconfig:$(build)/libpng/lib/pkgconfig:$(build)/harfbuzz/lib/pkgconfig:$(build)/bzip2/lib/pkgconfig CFLAGS=$(archflags) ./configure \
 			--prefix=$(build)/freetypehb \
 			--enable-static \
 			--disable-shared \
 			--with-harfbuzz \
-			--without-bzip2 \
 		&& LD_LIBRARY_PATH=$(build)/zlib/lib:$(build)/libpng/lib:$(build)/harfbuzz/lib make \
 		&& make install
 
@@ -128,15 +134,18 @@ ifeq ("${OS}", "darwin")
 	libtool -static -o $(dist)/lib/libfreetype.a \
 		$(build)/zlib/lib/libz.a \
 		$(build)/libpng/lib/libpng16.a \
+		$(build)/bzip2/lib/libbz2.a \
 		$(build)/freetype/lib/libfreetype.a
 	libtool -static -o $(dist)/lib/libfreetypehb.a \
 		$(build)/zlib/lib/libz.a \
 		$(build)/libpng/lib/libpng16.a \
+		$(build)/bzip2/lib/libbz2.a \
 		$(build)/harfbuzz/lib/libharfbuzz.a \
 		$(build)/freetype/lib/libfreetype.a
 	libtool -static -o $(dist)/lib/libfreetypehb-subset.a \
 		$(build)/zlib/lib/libz.a \
 		$(build)/libpng/lib/libpng16.a \
+		$(build)/bzip2/lib/libbz2.a \
 		$(build)/harfbuzz/lib/libharfbuzz.a \
 		$(build)/harfbuzz/lib/libharfbuzz-subset.a \
 		$(build)/freetype/lib/libfreetype.a
