@@ -45,8 +45,8 @@ clean-bzip2:
 	rm -rf $(build)/bzip2
 build-bzip2: clean-bzip2
 	mkdir -p $(build)/bzip2
+	-cd src/$(FTB_BZIP2) && make clean
 	cd src/$(FTB_BZIP2) \
-	 	&& make clean \
 		&& make CFLAGS="$(archflags) -fPIC" \
 		&& make install PREFIX=$(build)/bzip2
 
@@ -54,8 +54,8 @@ clean-zlib:
 	rm -rf $(build)/zlib
 build-zlib: clean-zlib
 	mkdir -p $(build)/zlib
+	-cd src/$(FTB_ZLIB) && make clean
 	cd src/$(FTB_ZLIB) \
-		&& make clean \
 		&& CFLAGS="$(archflags) -fPIC" ./configure --prefix=$(build)/zlib --static \
 		&& make \
 		&& make install
@@ -64,8 +64,8 @@ clean-libpng:
 	rm -rf $(build)/libpng
 build-libpng: clean-libpng build-zlib
 	mkdir -p $(build)/libpng
+	-cd src/$(FTB_LIBPNG) && make clean
 	cd src/$(FTB_LIBPNG) \
-		&& make clean \
 		&& LDFLAGS="-L$(build)/zlib/lib" CFLAGS="$(archflags) -fPIC" CPPFLAGS="-I $(build)/zlib/include $(archflags) -fPIC" ./configure \
 			--prefix=$(build)/libpng \
 			--enable-static \
@@ -78,8 +78,8 @@ clean-freetype:
 	rm -rf $(build)/freetype
 build-freetype: clean-freetype build-libpng build-zlib build-bzip2
 	mkdir -p $(build)/freetype
+	-cd src/$(FTB_FREETYPE) && make clean
 	cd src/$(FTB_FREETYPE) \
-		&& make clean \
 		&& PKG_CONFIG_LIBDIR=$(build)/zlib/lib/pkgconfig:$(build)/libpng/lib/pkgconfig CFLAGS="$(archflags) -fPIC -I$(build)/bzip2/include" LDFLAGS="-L$(build)/bzip2/lib" ./configure \
 			--prefix=$(build)/freetype \
 			--enable-static \
@@ -95,8 +95,8 @@ clean-harfbuzz:
 	rm -rf $(build)/harfbuzz
 build-harfbuzz: clean-harfbuzz build-libpng build-zlib build-freetype
 	mkdir -p $(build)/harfbuzz
+	-cd src/$(FTB_HARFBUZZ) && make clean
 	cd src/$(FTB_HARFBUZZ) \
-		&& make clean \
 		&& autoreconf --force --install \
 		&& PKG_CONFIG_LIBDIR=$(build)/zlib/lib/pkgconfig:$(build)/libpng/lib/pkgconfig:$(build)/freetype/lib/pkgconfig CFLAGS="$(archflags) -fPIC" CXXFLAGS="$(archflags) -fPIC" ./configure \
 			--prefix=$(build)/harfbuzz \
@@ -119,8 +119,8 @@ clean-freetypehb:
 	rm -rf $(build)/freetypehb
 build-freetypehb: clean-freetypehb build-libpng build-zlib build-bzip2 build-harfbuzz
 	mkdir -p $(build)/freetypehb
+	-cd src/$(FTB_FREETYPE) && make clean
 	cd src/$(FTB_FREETYPE) \
-		&& make clean \
 		&& PKG_CONFIG_LIBDIR=$(build)/zlib/lib/pkgconfig:$(build)/libpng/lib/pkgconfig:$(build)/harfbuzz/lib/pkgconfig CFLAGS="$(archflags) -fPIC -I$(build)/bzip2/include" LDFLAGS="-L$(build)/bzip2/lib" ./configure \
 			--prefix=$(build)/freetypehb \
 			--enable-static \
