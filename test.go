@@ -2,22 +2,22 @@ package main
 
 // #cgo linux,386 CFLAGS: -I${SRCDIR}/dist/linux_386/include/freetype2 -Werror -Wall -Wextra -Wno-unused-parameter
 // #cgo linux,386,!harfbuzz LDFLAGS: -L${SRCDIR}/dist/linux_386/lib -lfreetype -lbz2 -lpng16 -lz -lm
-// #cgo linux,386,harfbuzz LDFLAGS: -L${SRCDIR}/dist/linux_386/lib lharfbuzz -lfreetypehb -lbz2 -lpng16 -lz -lm
+// #cgo linux,386,harfbuzz LDFLAGS: -L${SRCDIR}/dist/linux_386/lib -lfreetypehb -lharfbuzz -lbz2 -lpng16 -lz -lm
 // #cgo linux,386,harfbuzz,subset LDFLAGS: -L${SRCDIR}/dist/linux_386/lib -lfreetypehb -lharfbuzz-subset -lharfbuzz -lbz2 -lpng16 -lz -lm
 //
 // #cgo linux,amd64 CFLAGS: -I${SRCDIR}/dist/linux_amd64/include/freetype2 -Werror -Wall -Wextra -Wno-unused-parameter
 // #cgo linux,amd64,!harfbuzz LDFLAGS: -L${SRCDIR}/dist/linux_amd64/lib -lfreetype -lbz2 -lpng16 -lz -lm
-// #cgo linux,amd64,harfbuzz LDFLAGS: -L${SRCDIR}/dist/linux_amd64/lib lharfbuzz -lfreetypehb -lbz2 -lpng16 -lz -lm
+// #cgo linux,amd64,harfbuzz LDFLAGS: -L${SRCDIR}/dist/linux_amd64/lib -lfreetypehb -lharfbuzz -lbz2 -lpng16 -lz -lm
 // #cgo linux,amd64,harfbuzz,subset LDFLAGS: -L${SRCDIR}/dist/linux_amd64/lib -lfreetypehb -lharfbuzz-subset -lharfbuzz -lbz2 -lpng16 -lz -lm
 //
 // #cgo darwin,amd64 CFLAGS: -I${SRCDIR}/dist/darwin_amd64/include/freetype2 -Werror -Wall -Wextra -Wno-unused-parameter
 // #cgo darwin,amd64,!harfbuzz LDFLAGS: -L${SRCDIR}/dist/darwin_amd64/lib -lfreetype -lbz2 -lpng16 -lz -lm
-// #cgo darwin,amd64,harfbuzz LDFLAGS: -L${SRCDIR}/dist/darwin_amd64/lib lharfbuzz -lfreetypehb -lbz2 -lpng16 -lz -lm
+// #cgo darwin,amd64,harfbuzz LDFLAGS: -L${SRCDIR}/dist/darwin_amd64/lib -lfreetypehb -lharfbuzz -lbz2 -lpng16 -lz -lm
 // #cgo darwin,amd64,harfbuzz,subset LDFLAGS: -L${SRCDIR}/dist/darwin_amd64/lib -lfreetypehb -lharfbuzz-subset -lharfbuzz -lbz2 -lpng16 -lz -lm
 //
 // #cgo darwin,386 CFLAGS: -I${SRCDIR}/dist/darwin_386/include/freetype2 -Werror -Wall -Wextra -Wno-unused-parameter
 // #cgo darwin,386,!harfbuzz LDFLAGS: -L${SRCDIR}/dist/darwin_386/lib -lfreetype -lbz2 -lpng16 -lz -lm
-// #cgo darwin,386,harfbuzz LDFLAGS: -L${SRCDIR}/dist/darwin_386/lib lharfbuzz -lfreetypehb -lbz2 -lpng16 -lz -lm
+// #cgo darwin,386,harfbuzz LDFLAGS: -L${SRCDIR}/dist/darwin_386/lib -lfreetypehb -lharfbuzz -lbz2 -lpng16 -lz -lm
 // #cgo darwin,386,harfbuzz,subset LDFLAGS: -L${SRCDIR}/dist/darwin_386/lib -lfreetypehb -lharfbuzz-subset -lharfbuzz -lbz2 -lpng16 -lz -lm
 //
 // #include <ft2build.h>
