@@ -3,7 +3,7 @@ build = $(pwd)/build/$(OS)_$(ARCH)
 dist = $(pwd)/dist/$(OS)_$(ARCH)
 
 ifeq ("${ARCH}", "386")
-archflags = "-m32"
+archflags = -m32
 endif
 
 define freetype_ar_script
@@ -46,6 +46,7 @@ clean-bzip2:
 build-bzip2: clean-bzip2
 	mkdir -p $(build)/bzip2
 	cd src/$(FTB_BZIP2) \
+	 	&& make clean \
 		&& make CFLAGS="$(archflags) -fPIC" \
 		&& make install PREFIX=$(build)/bzip2
 
@@ -54,6 +55,7 @@ clean-zlib:
 build-zlib: clean-zlib
 	mkdir -p $(build)/zlib
 	cd src/$(FTB_ZLIB) \
+		&& make clean \
 		&& CFLAGS="$(archflags) -fPIC" ./configure --prefix=$(build)/zlib --static \
 		&& make \
 		&& make install
@@ -63,6 +65,7 @@ clean-libpng:
 build-libpng: clean-libpng build-zlib
 	mkdir -p $(build)/libpng
 	cd src/$(FTB_LIBPNG) \
+		&& make clean \
 		&& LDFLAGS="-L$(build)/zlib/lib" CFLAGS="$(archflags) -fPIC" CPPFLAGS="-I $(build)/zlib/include $(archflags) -fPIC" ./configure \
 			--prefix=$(build)/libpng \
 			--enable-static \
@@ -76,6 +79,7 @@ clean-freetype:
 build-freetype: clean-freetype build-libpng build-zlib build-bzip2
 	mkdir -p $(build)/freetype
 	cd src/$(FTB_FREETYPE) \
+		&& make clean \
 		&& PKG_CONFIG_LIBDIR=$(build)/zlib/lib/pkgconfig:$(build)/libpng/lib/pkgconfig CFLAGS="$(archflags) -fPIC -I$(build)/bzip2/include" LDFLAGS="-L$(build)/bzip2/lib" ./configure \
 			--prefix=$(build)/freetype \
 			--enable-static \
@@ -92,6 +96,7 @@ clean-harfbuzz:
 build-harfbuzz: clean-harfbuzz build-libpng build-zlib build-freetype
 	mkdir -p $(build)/harfbuzz
 	cd src/$(FTB_HARFBUZZ) \
+		&& make clean \
 		&& autoreconf --force --install \
 		&& PKG_CONFIG_LIBDIR=$(build)/zlib/lib/pkgconfig:$(build)/libpng/lib/pkgconfig:$(build)/freetype/lib/pkgconfig CFLAGS="$(archflags) -fPIC" CXXFLAGS="$(archflags) -fPIC" ./configure \
 			--prefix=$(build)/harfbuzz \
@@ -134,31 +139,18 @@ clean-dist:
 dist: build clean-dist
 	mkdir -p $(dist)/lib
 	cp -r $(build)/freetype/include $(dist)
-ifeq ("${OS}", "linux")
-	cd $(dist)/lib && echo "$$freetype_ar_script" | ar -M
-	cd $(dist)/lib && echo "$$freetypehb_ar_script" | ar -M 
-	cd $(dist)/lib && echo "$$freetypehbss_ar_script" | ar -M 
-endif
-ifeq ("${OS}", "darwin")
-	libtool -static -o $(dist)/lib/libfreetype.a \
-		$(build)/zlib/lib/libz.a \
-		$(build)/libpng/lib/libpng16.a \
-		$(build)/bzip2/lib/libbz2.a \
-		$(build)/freetype/lib/libfreetype.a
-	libtool -static -o $(dist)/lib/libfreetypehb.a \
-		$(build)/zlib/lib/libz.a \
-		$(build)/libpng/lib/libpng16.a \
-		$(build)/bzip2/lib/libbz2.a \
-		$(build)/harfbuzz/lib/libharfbuzz.a \
-		$(build)/freetype/lib/libfreetype.a
-	libtool -static -o $(dist)/lib/libfreetypehb-subset.a \
-		$(build)/zlib/lib/libz.a \
-		$(build)/libpng/lib/libpng16.a \
-		$(build)/bzip2/lib/libbz2.a \
-		$(build)/harfbuzz/lib/libharfbuzz.a \
-		$(build)/harfbuzz/lib/libharfbuzz-subset.a \
-		$(build)/freetype/lib/libfreetype.a
-endif
+	cp $(build)/bzip2/lib/libbz2.a $(dist)/lib
+	cp $(build)/freetype/lib/libfreetype.a $(dist)/lib
+	cp $(build)/freetype/lib/libfreetype.la $(dist)/lib
+	cp $(build)/freetypehb/lib/libfreetypehb.a $(dist)/lib
+	cp $(build)/freetypehb/lib/libfreetypehb.la $(dist)/lib
+	cp $(build)/harfbuzz/lib/libharfbuzz.a $(dist)/lib
+	cp $(build)/harfbuzz/lib/libharfbuzz.la $(dist)/lib
+	cp $(build)/harfbuzz/lib/libharfbuzz-subset.a $(dist)/lib
+	cp $(build)/harfbuzz/lib/libharfbuzz-subset.la $(dist)/lib
+	cp $(build)/libpng/lib/libpng16.a $(dist)/lib
+	cp $(build)/libpng/lib/libpng16.la $(dist)/lib
+	cp $(build)/zlib/lib/libz.a $(dist)/lib
 	cd $(dist) && zip -r $(HOME)/$(OS)_$(ARCH).zip .
 
 test-ft:
