@@ -8,11 +8,6 @@ Project (www.freetype.org).  All rights reserved.
 The master branch is merely a template, all the code is in the version branches.  
 Builds are run automatically by [TravisCI](https://travis-ci.org/flga/freetype-builds). Headers and binaries are shipped as [Github Releases](https://github.com/flga/freetype-builds/releases).
 
-Every build produces 3 binaries, you should link against *one* of:
-* FreeType
-* FreeType + Harfbuzz
-* FreeType + Harfbuzz + Harfbuzz Subset
-
 ### Support Matrix
 OS | Arch
 ------ | ------
