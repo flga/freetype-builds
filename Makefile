@@ -138,6 +138,8 @@ clean-dist:
 	rm -rf $(dist)
 dist: build clean-dist
 	mkdir -p $(dist)/lib
+	mv $(build)/freetypehb/lib/libfreetype.a $(build)/freetypehb/lib/libfreetypehb.a
+	mv $(build)/freetypehb/lib/libfreetype.la $(build)/freetypehb/lib/libfreetypehb.la
 	cp -r $(build)/freetype/include $(dist)
 	cp $(build)/bzip2/lib/libbz2.a $(dist)/lib
 	cp $(build)/freetype/lib/libfreetype.a $(dist)/lib
