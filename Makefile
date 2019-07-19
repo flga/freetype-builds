@@ -6,37 +6,6 @@ ifeq ("${ARCH}", "386")
 archflags = -m32
 endif
 
-define freetype_ar_script
-create libfreetype.a
-addlib $(build)/zlib/lib/libz.a
-addlib $(build)/libpng/lib/libpng16.a
-addlib $(build)/bzip2/lib/libbz2.a
-addlib $(build)/freetype/lib/libfreetype.a
-save
-endef
-define freetypehb_ar_script
-create libfreetypehb.a
-addlib $(build)/zlib/lib/libz.a
-addlib $(build)/libpng/lib/libpng16.a
-addlib $(build)/bzip2/lib/libbz2.a
-addlib $(build)/harfbuzz/lib/libharfbuzz.a
-addlib $(build)/freetype/lib/libfreetype.a
-save
-endef
-define freetypehbss_ar_script
-create libfreetypehb-subset.a
-addlib $(build)/zlib/lib/libz.a
-addlib $(build)/libpng/lib/libpng16.a
-addlib $(build)/bzip2/lib/libbz2.a
-addlib $(build)/harfbuzz/lib/libharfbuzz.a
-addlib $(build)/harfbuzz/lib/libharfbuzz-subset.a
-addlib $(build)/freetype/lib/libfreetype.a
-save
-endef
-export freetype_ar_script
-export freetypehb_ar_script
-export freetypehbss_ar_script
-
 ifeq ("${OS}", "linux")
 goLDFlags = -ldflags "-linkmode external -extldflags -static"
 endif
