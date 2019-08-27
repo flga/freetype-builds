@@ -45,6 +45,7 @@ build-libpng: clean-libpng build-zlib
 
 clean-freetype:
 	rm -rf $(build)/freetype
+	-cd src/$(FTB_FREETYPE) && ./autogen.sh
 build-freetype: clean-freetype build-libpng build-zlib build-bzip2
 	mkdir -p $(build)/freetype
 	-cd src/$(FTB_FREETYPE) && make clean
@@ -86,6 +87,7 @@ build-harfbuzz: clean-harfbuzz build-libpng build-zlib build-freetype
 
 clean-freetypehb:
 	rm -rf $(build)/freetypehb
+	-cd src/$(FTB_FREETYPE) && ./autogen.sh
 build-freetypehb: clean-freetypehb build-libpng build-zlib build-bzip2 build-harfbuzz
 	mkdir -p $(build)/freetypehb
 	-cd src/$(FTB_FREETYPE) && make clean
