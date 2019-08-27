@@ -1,11 +1,11 @@
 /****************************************************************************
  *
- * sfnt.c
+ * woff2tags.h
  *
- *   Single object library component.
+ *   WOFFF2 Font table tags (specification).
  *
  * Copyright (C) 1996-2019 by
- * David Turner, Robert Wilhelm, and Werner Lemberg.
+ * Nikhil Ramakrishnan, David Turner, Robert Wilhelm, and Werner Lemberg.
  *
  * This file is part of the FreeType project, and may only be used,
  * modified, and distributed under the terms of the FreeType project
@@ -16,25 +16,24 @@
  */
 
 
-#define FT_MAKE_OPTION_SINGLE_OBJECT
+#ifndef WOFF2TAGS_H
+#define WOFF2TAGS_H
+
+
 #include <ft2build.h>
+#include FT_INTERNAL_OBJECTS_H
 
-#include "pngshim.c"
-#include "sfdriver.c"
-#include "sfobjs.c"
-#include "sfwoff.c"
-#include "sfwoff2.c"
-#include "ttbdf.c"
-#include "ttcmap.c"
-#include "ttcolr.c"
-#include "ttcpal.c"
 
-#include "ttkern.c"
-#include "ttload.c"
-#include "ttmtx.c"
-#include "ttpost.c"
-#include "ttsbit.c"
-#include "woff2tags.c"
+FT_BEGIN_HEADER
+
+
+  FT_LOCAL( FT_ULong )
+  woff2_known_tags( FT_Byte  index );
+
+
+FT_END_HEADER
+
+#endif /* WOFF2TAGS_H */
 
 
 /* END */
