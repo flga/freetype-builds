@@ -46,9 +46,9 @@ before_deploy:
 deploy:
   provider: releases
   name: FreeType $TRAVIS_TAG
-  body: "This is a release for FreeType $FTB_VERSION, which includes $FTB_ZLIB, $FTB_LIBPNG, $FTB_BZIP2, $FTB_HARFBUZZ. Checksums are in the build logs of the respective os/arch at $TRAVIS_BUILD_WEB_URL (towards the end, in the before_deploy section)."
+  body: "This is a release for FreeType tip, which includes $FTB_ZLIB, $FTB_LIBPNG, $FTB_BZIP2, $FTB_HARFBUZZ. Checksums are in the build logs of the respective os/arch at $TRAVIS_BUILD_WEB_URL (towards the end, in the before_deploy section)."
   prerelease: true
-  overwrite: false
+  overwrite: true
   skip_cleanup: true
   api_key:
     secure: mTvESW2SSlfpcXQaGZnQFmFomL1QpA4+aIa5V1Bi71nqecQOkKkb/XLLi1jBZ2HU14qXKFtEHTiUmJ6Frc4A6QbI0ZIGMLLnqxFMhlA5M97sgqMfGPl24FNiU2qDc8H2JGvP7VZjwM5QueGwF7CXwHgjmDxbtwkXFn+l9UDXiONS77OdafVeuqu2D+GLR0IbXlmPKmp/tBaJfUPFaZIdNC5wW+tSwcV1JkcrkksjXHcdodb/87z6/qrVjLMLFQHlrPK5HhXv+5CJ0byI8yd/YG8Dr4s2IrbQCZBtgNZg4tTZYSdNgCsZ2EElp0+C9IjkSG0qNHhlAqNuN2q7KpStsHpmdvod6PbDF3znfQBqYLi6UQ8fUQlsM+hQgPzegqiPZO0ktKNzbwI2ISwjfQc/jUiGkNrwiCq12JRqAWuO+2jm/9mXVp78C4k67GvfvdYT1nkv44rW1v6mtQf1uiEqJdrumRuUp6UI/ojo8apMFmLkWkA+CwmjKl55zUyvHWHxE0geBJxDvubMKXI88Dsb6kUHwd7udz0UDJ5R833UBOBtRGwyaw1DLsSS3Y3eybPbJnf03sG2VqhA72AlsdzQHjnuFCoWlUx85QTw0BxDW5PBG43g2ko8H7u7VtzZWQf4GxK20/EVX4pGhGPOZ7NtvgEvOJ67HmRg6BVREqjkQ58=
