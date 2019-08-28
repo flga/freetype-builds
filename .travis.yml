@@ -55,4 +55,3 @@ deploy:
   file: $(go env GOHOSTOS)_${ARCH}.zip
   on:
     repo: flga/freetype-builds
-    tags: true
